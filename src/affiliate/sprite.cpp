@@ -2,7 +2,7 @@
 
 Texture::Texture(const std::string &file_path)
 {
-    texture = Game::GetInstance().getAssetStore()->getImage(file_path);
+    texture = Game::getInstance().getAssetStore()->getImage(file_path);
     SDL_GetTextureSize(texture, &src_rect.w, &src_rect.h);
 }
 
@@ -22,7 +22,7 @@ void Sprite::render()
 {
     if (!texture_.texture || !parent_ || is_finish_) return;
     auto pos = parent_->getRenderPosition() + offset_;
-    game_.renderTexture(texture_, pos, size_, percentage_);   //解耦
+    Game::getInstance().renderTexture(texture_, pos, size_, percentage_);   //解耦
 }
 
 void Sprite::setTexture(const Texture &texture)

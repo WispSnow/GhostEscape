@@ -13,7 +13,7 @@ void Actor::move(float dt)
         margin_top_left = collider_->getOffset();
         margin_bottom_right = collider_->getOffset() + collider_->getSize();
     }
-    position_ = glm::clamp(position_, glm::vec2(0) - margin_top_left, game_.getCurrentScene()->getWorldSize() - margin_bottom_right);
+    position_ = glm::clamp(position_, glm::vec2(0) - margin_top_left, Game::getInstance().getCurrentScene()->getWorldSize() - margin_bottom_right);
 }
 
 void Actor::update(float dt)

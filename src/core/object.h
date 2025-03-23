@@ -9,7 +9,6 @@ class Object {
     
 protected:
     ObjectType type_ = ObjectType::NONE;
-    Game& game_ = Game::GetInstance();
     std::vector<Object*> object_to_add_;
     std::vector<Object*> children_;
     bool is_active_ = true;
