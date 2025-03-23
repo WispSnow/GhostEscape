@@ -18,10 +18,10 @@ void AffiliateBar::render()
 {
     auto pos = parent_->getRenderPosition() + offset_;
     if (percentage_ > 0.7f){
-        Game::getInstance().renderHBar(pos, size_, percentage_, color_high_);
+        Game::getInstance()->renderHBar(pos, size_, percentage_, color_high_);
     } else if (percentage_ > 0.3f){
-        Game::getInstance().renderHBar(pos, size_, percentage_, color_mid_);
+        Game::getInstance()->renderHBar(pos, size_, percentage_, color_mid_);
     } else {
-        Game::getInstance().renderHBar(pos, size_, percentage_, color_low_);
+        Game::getInstance()->renderHBar(pos, size_, percentage_, color_low_);
     }
 }

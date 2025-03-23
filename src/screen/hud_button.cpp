@@ -20,7 +20,7 @@ bool HUDButton::handleEvents(SDL_Event &event)
         if (event.button.button == SDL_BUTTON_LEFT) {
             if (is_hover_){
                 is_press_ = true;
-                Game::getInstance().playSound("assets/sound/UI_button08.wav");
+                Game::getInstance()->playSound("assets/sound/UI_button08.wav");
                 return true;
             }
         }
@@ -46,14 +46,14 @@ void HUDButton::checkHover()
     bool new_hover_;
     auto pos = render_position_ + sprite_normal_->getOffset();
     auto size = sprite_normal_->getSize();
-    if (Game::getInstance().isMouseInRect(pos, pos + size)){
+    if (Game::getInstance()->isMouseInRect(pos, pos + size)){
         new_hover_ = true;
     } else {
         new_hover_ = false;
     }
     if (new_hover_ != is_hover_){
         is_hover_ = new_hover_;
-        if (is_hover_ && !is_press_) Game::getInstance().playSound("assets/sound/UI_button12.wav");
+        if (is_hover_ && !is_press_) Game::getInstance()->playSound("assets/sound/UI_button12.wav");
     }
 }
 

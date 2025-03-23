@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <random>
+#include <mutex>
 #include "asset_store.h"
 
 struct Texture;
@@ -36,6 +37,10 @@ class Game
 
     std::mt19937 gen_ = std::mt19937(std::random_device{}());
 
+    static Game* instance_;
+    // static std::mutex mutex_;
+    static std::once_flag once_flag_;
+
     // 私有构造函数
     Game(){}
     // 禁止拷贝构造函数与赋值操作符
@@ -43,11 +48,12 @@ class Game
     Game& operator=(const Game&) = delete;
 
 public:
-    static Game& getInstance()
+    static Game* getInstance()  // C++11标准中推荐的单例模式        
     {
-        static Game instance;
-        return instance;
+        std::call_once(once_flag_, initInstance);       // 懒加载,线程安全
+        return instance_;
     }
+    static void initInstance() {instance_ = new Game();}
 
     void run(); // 运行游戏, 执行游戏主循环
     void init(std::string title, int width, int height); // 初始化游戏

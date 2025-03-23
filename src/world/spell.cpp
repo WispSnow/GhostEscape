@@ -24,7 +24,7 @@ void Spell::update(float dt)
 
 void Spell::attack()
 {
-    auto objects = Game::getInstance().getCurrentScene()->getChildrenWorld();
+    auto objects = Game::getInstance()->getCurrentScene()->getChildrenWorld();
     for (auto& object : objects)
     {
         if (object->getType() != ObjectType::ENEMY) continue;

@@ -18,7 +18,7 @@ void Player::init()
 
     collider_ = Collider::addColliderChild(this, sprite_idle_->getSize() / 2.0f);
     stats_ = Stats::addStatsChild(this);
-    effect_ = Effect::addEffectChild(Game::getInstance().getCurrentScene(), "assets/effect/1764.png", glm::vec2(0), 2.0f);
+    effect_ = Effect::addEffectChild(Game::getInstance()->getCurrentScene(), "assets/effect/1764.png", glm::vec2(0), 2.0f);
     effect_->setActive(false);
     weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f, 40.0f);
     
@@ -58,7 +58,7 @@ void Player::takeDamage(float damage)
 {
     if (!stats_ || stats_->getInvincible()) return;
     Actor::takeDamage(damage);
-    Game::getInstance().playSound("assets/sound/hit-flesh-02-266309.mp3");
+    Game::getInstance()->playSound("assets/sound/hit-flesh-02-266309.mp3");
 }
 
 void Player::keyboardControl()
@@ -80,7 +80,7 @@ void Player::keyboardControl()
 
 void Player::syncCamera()
 {
-    Game::getInstance().getCurrentScene()->setCameraPosition(position_ - Game::getInstance().getScreenSize() / 2.0f);
+    Game::getInstance()->getCurrentScene()->setCameraPosition(position_ - Game::getInstance()->getScreenSize() / 2.0f);
 }
 
 void Player::checkState()
@@ -123,6 +123,6 @@ void Player::checkIsDead()
         effect_->setActive(true);
         effect_->setPosition(getPosition());
         setActive(false);
-        Game::getInstance().playSound("assets/sound/female-scream-02-89290.mp3");
+        Game::getInstance()->playSound("assets/sound/female-scream-02-89290.mp3");
     }
 }

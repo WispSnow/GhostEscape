@@ -7,6 +7,10 @@
 #include "../affiliate/sprite.h"
 #include <fstream>
 
+Game* Game::instance_ = nullptr;
+// std::mutex Game::mutex_;
+std::once_flag Game::once_flag_;
+
 void Game::run()
 {
     while (is_running_){

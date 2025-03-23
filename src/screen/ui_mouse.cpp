@@ -22,5 +22,5 @@ void UIMouse::update(float dt)
     } else {
         timer_ = 0;
     }
-    setRenderPosition(Game::getInstance().getMousePosition());
+    setRenderPosition(Game::getInstance()->getMousePosition());
 }

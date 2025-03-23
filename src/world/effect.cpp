@@ -35,7 +35,7 @@ void Effect::checkFinish()
     {
         need_remove_ = true;
         if (next_object_){
-            Game::getInstance().getCurrentScene()->safeAddChild(next_object_);
+            Game::getInstance()->getCurrentScene()->safeAddChild(next_object_);
             next_object_ = nullptr;
         }
     }
