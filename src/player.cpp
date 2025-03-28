@@ -5,8 +5,6 @@
 #include "raw/stats.h"
 #include "affiliate/text_label.h"
 #include "raw/timer.h"
-#include "move_control_arrow.h"
-#include "move_control_wasd.h"
 
 void Player::init()
 {
@@ -24,20 +22,12 @@ void Player::init()
     effect_->setActive(false);
     weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f, 40.0f);
 
-    move_control_ = new MoveControlWASD();
-    addChild(move_control_);
+    setMoveControl(new MoveControl());
 }
 
 bool Player::handleEvents(SDL_Event& event)
 {
     if (Actor::handleEvents(event)) return true;
-    // 按C键切换WASD，按V键切换箭头
-    if (event.type == SDL_EVENT_KEY_DOWN)
-    {
-        if (event.key.scancode == SDL_SCANCODE_C) setMoveControl(new MoveControlWASD());
-        if (event.key.scancode == SDL_SCANCODE_V) setMoveControl(new MoveControlArrow());
-        return true;
-    }
     return false;
     
 }
@@ -45,8 +35,7 @@ bool Player::handleEvents(SDL_Event& event)
 void Player::update(float dt)
 {
     Actor::update(dt);
-    velocity_ *= 0.9f;
-    moveControl();
+    if (!move_control_) autoEscape(); //如果没有移动控制，则自动逃跑
     checkState();
     move(dt);
     syncCamera();
@@ -73,30 +62,10 @@ void Player::takeDamage(float damage)
     Game::getInstance().playSound("assets/sound/hit-flesh-02-266309.mp3");
 }
 
-void Player::setMoveControl(MoveControl *move_control)
+void Player::autoEscape()
 {
-    if (move_control_ != nullptr) {
-        move_control_->setNeedRemove(true);
-    }
-    move_control_ = move_control;
-    safeAddChild(move_control);
-}
-
-void Player::moveControl()
-{
-    if (move_control_ == nullptr) return;
-    if (move_control_->isUp()){
-        velocity_.y = -max_speed_;
-    }
-    if (move_control_->isDown()){
-        velocity_.y = max_speed_;
-    }
-    if (move_control_->isLeft()){
-        velocity_.x = -max_speed_;
-    }
-    if (move_control_->isRight()){
-        velocity_.x = max_speed_;
-    }
+    velocity_ = glm::vec2(0);
+    // TODO: 自动逃跑
 }
 
 void Player::syncCamera()

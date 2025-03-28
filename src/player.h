@@ -11,7 +11,6 @@ class Timer;
 class Player : public Actor
 {
 protected:
-    MoveControl* move_control_ = nullptr;
     WeaponThunder* weapon_thunder_ = nullptr;
     SpriteAnim* sprite_idle_ = nullptr;
     SpriteAnim* sprite_move_ = nullptr;
@@ -28,10 +27,8 @@ public:
 
     virtual void takeDamage(float damage) override;
 
-    void setMoveControl(MoveControl* move_control);     // 同一时刻只能有一种操作方式
-
 private:
-    void moveControl();
+    void autoEscape();
     void syncCamera();
     void checkState();
     void changeState(bool is_moving);

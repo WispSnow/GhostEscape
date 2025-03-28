@@ -52,8 +52,6 @@ add_executable(${TARGET}
                 src/affiliate/collider.cpp
                 src/affiliate/affiliate_bar.cpp
                 src/affiliate/text_label.cpp
-                src/move_control_arrow.cpp
-                src/move_control_wasd.cpp
                 src/spawner.cpp
                 src/player.cpp
                 src/enemy.cpp

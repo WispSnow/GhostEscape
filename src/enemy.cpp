@@ -37,7 +37,7 @@ void Enemy::init()
 void Enemy::update(float dt){
     Actor::update(dt);
     if (target_->getActive()){
-        aim_target(target_);
+        if (!move_control_) aim_target(target_);
         move(dt);
         attack();
     }

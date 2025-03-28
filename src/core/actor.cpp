@@ -16,6 +16,24 @@ void Actor::move(float dt)
     position_ = glm::clamp(position_, glm::vec2(0) - margin_top_left, Game::getInstance().getCurrentScene()->getWorldSize() - margin_bottom_right);
 }
 
+void Actor::removeMoveControl()
+{
+    if (move_control_) {
+        move_control_->setNeedRemove(true);
+        move_control_ = nullptr;
+    }
+}
+
+void Actor::setMoveControl(MoveControl *move_control)
+{
+    if (move_control_) {
+        move_control_->setNeedRemove(true);
+    }
+    move_control_ = move_control;
+    move_control_->setParent(this);
+    safeAddChild(move_control_);
+}
+
 void Actor::update(float dt)
 {
     ObjectWorld::update(dt);
