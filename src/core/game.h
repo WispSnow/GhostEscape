@@ -23,9 +23,9 @@ class Game
     Scene* current_scene_ = nullptr; // 当前场景
     Scene* next_scene_ = nullptr;
 
-    Uint64 FPS_ = 60; // 游戏帧率
-    Uint64 frame_delay_ = 0; // 帧延迟，单位ns
-    float dt_ = 0.0f; // 帧间隔
+    // Uint64 FPS_ = 60; // 游戏帧率
+    // Uint64 frame_delay_ = 0; // 帧延迟，单位ns
+    // float dt_ = 0.0f; // 帧间隔
 
     int score_ = 0;
     int high_score_ = 0;
@@ -49,9 +49,9 @@ public:
         return instance;
     }
 
-    void run(); // 运行游戏, 执行游戏主循环
+    // void run(); // 运行游戏, 执行游戏主循环
     void init(std::string title, int width, int height); // 初始化游戏
-    void handleEvents(); // 处理事件
+    void handleEvents(SDL_Event& event); // 处理事件
     void update(float dt); // 更新游戏状态
     void render(); // 渲染游戏
     void clean(); // 清理游戏资源
@@ -66,6 +66,7 @@ public:
     int getScore() const { return score_; } // 获取分数
     void setHighScore(int high_score) { high_score_ = high_score; } // 设置最高分数
     int getHighScore() const { return high_score_; } // 获取最高分数
+    bool getIsRunning() const { return is_running_; } // 判断游戏是否在运行
 
     void addScore(int score);
     void quit() { is_running_ = false; }
@@ -105,6 +106,7 @@ public:
 
 private:
     void updateMouse();
+    void checkChangeScene();
 };
 
 #endif // GAME_H

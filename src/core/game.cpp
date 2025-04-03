@@ -7,28 +7,28 @@
 #include "../affiliate/sprite.h"
 #include <fstream>
 
-void Game::run()
-{
-    while (is_running_){
-        auto start = SDL_GetTicksNS();
-        if (next_scene_){
-            changeScene(next_scene_);
-            next_scene_ = nullptr;
-        }
-        handleEvents();
-        update(dt_);
-        render();
-        auto end = SDL_GetTicksNS();
-        auto elapsed = end - start;
-        if (elapsed < frame_delay_){
-            SDL_DelayNS(frame_delay_ - elapsed);
-            dt_ = frame_delay_ / 1.0e9;
-        }else{
-            dt_ = elapsed / 1.0e9;
-        }
-        // SDL_Log("FPS: %f", 1.0 / dt_);
-    }
-}
+// void Game::run()
+// {
+//     while (is_running_){
+//         auto start = SDL_GetTicksNS();
+//         if (next_scene_){
+//             changeScene(next_scene_);
+//             next_scene_ = nullptr;
+//         }
+//         handleEvents();
+//         update(dt_);
+//         render();
+//         auto end = SDL_GetTicksNS();
+//         auto elapsed = end - start;
+//         if (elapsed < frame_delay_){
+//             SDL_DelayNS(frame_delay_ - elapsed);
+//             dt_ = frame_delay_ / 1.0e9;
+//         }else{
+//             dt_ = elapsed / 1.0e9;
+//         }
+//         // SDL_Log("FPS: %f", 1.0 / dt_);
+//     }
+// }
 
 void Game::init(std::string title, int width, int height)
 {
@@ -63,8 +63,8 @@ void Game::init(std::string title, int width, int height)
 
     ttf_engine_ = TTF_CreateRendererTextEngine(renderer_);
 
-    // 计算帧延迟
-    frame_delay_ = 1000000000 / FPS_;
+    // // 计算帧延迟
+    // frame_delay_ = 1000000000 / FPS_;
 
     // 创建资源管理器
     asset_store_ = new AssetStore(renderer_);
@@ -75,22 +75,21 @@ void Game::init(std::string title, int width, int height)
     current_scene_->init();
 }
 
-void Game::handleEvents()
+void Game::handleEvents(SDL_Event& event)
 {
-    SDL_Event event;
-    while (SDL_PollEvent(&event)){
-        switch (event.type){
-        case SDL_EVENT_QUIT:
-            is_running_ = false;
-            break;
-        default:
-            current_scene_->handleEvents(event);
-        }
-    }
+    // SDL_Event event;
+    // while (SDL_PollEvent(&event)){
+    //     switch (event.type){
+    //     case SDL_EVENT_QUIT:
+    //         is_running_ = false;
+    //         break;
+
+    current_scene_->handleEvents(event);
 }
 
 void Game::update(float dt)
 {
+    checkChangeScene();
     updateMouse();
     current_scene_->update(dt);
 }
@@ -253,6 +252,14 @@ void Game::updateMouse()
     // SDL_FRect rect;
     // SDL_GetRenderLogicalPresentationRect(renderer_, &rect);
     // mouse_position_ = (mouse_position_ - glm::vec2(rect.x, rect.y))  * screen_size_ / glm::vec2(rect.w, rect.h);
+}
+
+void Game::checkChangeScene()
+{
+    if (next_scene_){
+        changeScene(next_scene_);
+        next_scene_ = nullptr;
+    }
 }
 
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &botton_right, float grid_width, SDL_FColor fcolor)
