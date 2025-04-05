@@ -22,6 +22,7 @@ bool Weapon::handleEvents(SDL_Event &event)
         if (event.button.button == trigger_button_) {
             auto pos = Game::getInstance().getMousePosition() + Game::getInstance().getCurrentScene()->getCameraPosition();
             attack(pos);
+            return true;
         }
     }
     return false;

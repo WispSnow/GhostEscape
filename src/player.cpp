@@ -27,6 +27,13 @@ void Player::init()
     spell_prototype->setActive(false);
     weapon_->setSpellPrototype(spell_prototype);
 
+    weapon2_ = Weapon::addWeaponChild(this, 1.0f, 10.0f);
+    auto spell_prototype2 = Spell::addSpellChild(Game::getInstance().getCurrentScene(), "assets/effect/Explosion 2 SpriteSheet.png", glm::vec2(0), 20.0f, 3.0f, Anchor::CENTER);
+    spell_prototype2->setActive(false);
+    weapon2_->setSpellPrototype(spell_prototype2);
+    weapon2_->setSoundPath("assets/sound/fire-magic-6947.mp3");
+    weapon2_->setTriggerButton(SDL_BUTTON_MIDDLE);
+
     setMoveControl(new MoveControl());
 }
 

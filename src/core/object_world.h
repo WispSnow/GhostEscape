@@ -14,6 +14,8 @@ public:
     virtual void init() override {type_ = ObjectType::OBJECT_WORLD;}
     virtual void update(float dt) override;
 
+    virtual ObjectWorld* clone() { return nullptr; }     // 需要用到clone的子类进行重写
+
     virtual void takeDamage(float) {}
     // getters and stters
     virtual glm::vec2 getPosition() const override { return position_; }

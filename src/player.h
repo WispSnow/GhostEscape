@@ -12,6 +12,7 @@ class Player : public Actor
 {
 protected:
     Weapon* weapon_ = nullptr;
+    Weapon* weapon2_ = nullptr;
     SpriteAnim* sprite_idle_ = nullptr;
     SpriteAnim* sprite_move_ = nullptr;
     Effect* effect_ = nullptr;
@@ -30,6 +31,7 @@ public:
     // getters and setters
     void setWeapon(Weapon* weapon) { weapon_ = weapon; }
     Weapon* getWeapon() const { return weapon_; }
+    Weapon* getWeapon2() const { return weapon2_; }
 
 private:
     void autoEscape();

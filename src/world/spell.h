@@ -15,7 +15,7 @@ public:
     static Spell* addSpellChild(Object* parent, const std::string& file_path, glm::vec2 pos, float damage, float scale = 1.0f, Anchor anchor = Anchor::CENTER);
     void update(float dt) override;
 
-    Spell* clone();
+    virtual Spell* clone() override;
 
     // getters and setters
     float getDamage() const { return damage_; }
