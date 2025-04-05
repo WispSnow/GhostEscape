@@ -8,6 +8,7 @@
 #include "screen/hud_stats.h"
 #include "screen/hud_text.h"
 #include "screen/hud_button.h"
+#include "screen/hud_skill.h"
 #include "scene_title.h"
 #include "raw/timer.h"
 #include "raw/bg_star.h"
@@ -40,6 +41,12 @@ void SceneMain::init()
 
     hud_stats_ = HUDStats::addHUDStatsChild(this, player_, glm::vec2(30.f));
     hud_text_score_ = HUDText::addHUDTextChild(this, "Score: 0", glm::vec2(Game::getInstance().getScreenSize().x - 120.f, 30.f), glm::vec2(200, 50));
+
+    auto scene = Game::getInstance().getCurrentScene();
+    auto pos = glm::vec2(Game::getInstance().getScreenSize().x - 300, 30);
+    auto hud_skill = HUDSkill::addHUDSkillChild(scene, "assets/UI/Electric-Icon.png", pos, 0.14f, Anchor::CENTER);
+
+    player_->getWeapon()->setHUDSkill(hud_skill);
 
     ui_mouse_ = UIMouse::addUIMouseChild(this, "assets/UI/29.png", "assets/UI/30.png", 1.0f, Anchor::CENTER);   // 最后添加
 }

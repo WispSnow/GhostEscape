@@ -4,14 +4,14 @@
 #include "core/actor.h"
 #include "affiliate/sprite_anim.h"
 #include "world/effect.h"
-#include "weapon_thunder.h"
+#include "raw/weapon.h"
 #include "raw/move_control.h"
 
 class Timer;
 class Player : public Actor
 {
 protected:
-    WeaponThunder* weapon_thunder_ = nullptr;
+    Weapon* weapon_ = nullptr;
     SpriteAnim* sprite_idle_ = nullptr;
     SpriteAnim* sprite_move_ = nullptr;
     Effect* effect_ = nullptr;
@@ -26,6 +26,10 @@ public:
     virtual void clean() override;
 
     virtual void takeDamage(float damage) override;
+
+    // getters and setters
+    void setWeapon(Weapon* weapon) { weapon_ = weapon; }
+    Weapon* getWeapon() const { return weapon_; }
 
 private:
     void autoEscape();

@@ -33,11 +33,11 @@ bool WeaponThunder::handleEvents(SDL_Event &event)
     if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
         if (event.button.button == SDL_BUTTON_LEFT) {
             if (canAttack()) {
-                Game::getInstance().playSound("assets/sound/big-thunder.mp3");
-                auto pos = Game::getInstance().getMousePosition() + Game::getInstance().getCurrentScene()->getCameraPosition();
-                auto spell = Spell::addSpellChild(nullptr, "assets/effect/Thunderstrike w blur.png", pos, 40.0f, 3.0f, Anchor::CENTER);
-                attack(pos, spell);
-                return true;
+                // Game::getInstance().playSound("assets/sound/big-thunder.mp3");
+                // auto pos = Game::getInstance().getMousePosition() + Game::getInstance().getCurrentScene()->getCameraPosition();
+                // auto spell = Spell::addSpellChild(nullptr, "assets/effect/Thunderstrike w blur.png", pos, 40.0f, 3.0f, Anchor::CENTER);
+                // attack(pos, spell);
+                // return true;
             }
         }
     }

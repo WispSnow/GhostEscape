@@ -55,7 +55,6 @@ add_executable(${TARGET}
                 src/spawner.cpp
                 src/player.cpp
                 src/enemy.cpp
-                src/weapon_thunder.cpp
                 src/main.cpp
                 src/scene_title.cpp
                 src/scene_main.cpp
