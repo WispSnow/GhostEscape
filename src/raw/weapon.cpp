@@ -37,12 +37,12 @@ void Weapon::update(float dt)
 
 void Weapon::attack(glm::vec2 position)
 {
-    if (!spell_prototype_ || !canAttack()) return;
+    if (!spell_creator_ || !canAttack()) return;
     parent_->getStats()->useMana(mana_cost_);
     cool_down_timer_ = 0.0f;
-    // 把spell_prototype_复制一份，添加到场景中
+    // 通过spell_creator_创建一个spell，添加到场景中
     Game::getInstance().playSound(sound_path_);
-    auto spell = spell_prototype_->clone();
+    auto spell = spell_creator_->createSpell();
     spell->setPosition(position);
 }
 

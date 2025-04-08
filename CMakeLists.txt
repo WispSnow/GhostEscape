@@ -45,6 +45,8 @@ add_executable(${TARGET}
                 src/raw/timer.cpp
                 src/raw/bg_star.cpp
                 src/raw/move_control.cpp
+                src/raw/thunder_spell_creator.cpp
+                src/raw/fire_spell_creator.cpp
                 src/world/effect.cpp
                 src/world/spell.cpp
                 src/affiliate/sprite.cpp

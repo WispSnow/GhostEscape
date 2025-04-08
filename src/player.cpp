@@ -6,6 +6,8 @@
 #include "affiliate/text_label.h"
 #include "raw/timer.h"
 #include "world/spell.h"
+#include "raw/fire_spell_creator.h"
+#include "raw/thunder_spell_creator.h"
 
 void Player::init()
 {
@@ -23,14 +25,16 @@ void Player::init()
     effect_->setActive(false);
 
     weapon_ = Weapon::addWeaponChild(this, 2.0f, 40.0f);
-    auto spell_prototype = Spell::addSpellChild(Game::getInstance().getCurrentScene(), "assets/effect/Thunderstrike w blur.png", glm::vec2(0), 40.0f, 3.0f, Anchor::CENTER);
-    spell_prototype->setActive(false);
-    weapon_->setSpellPrototype(spell_prototype);
+    auto thunder_spell_creator = new ThunderSpellCreator();
+    thunder_spell_creator->init();
+    weapon_->setSpellCreator(thunder_spell_creator);
+    weapon_->addChild(thunder_spell_creator);
 
     weapon2_ = Weapon::addWeaponChild(this, 1.0f, 10.0f);
-    auto spell_prototype2 = Spell::addSpellChild(Game::getInstance().getCurrentScene(), "assets/effect/Explosion 2 SpriteSheet.png", glm::vec2(0), 20.0f, 3.0f, Anchor::CENTER);
-    spell_prototype2->setActive(false);
-    weapon2_->setSpellPrototype(spell_prototype2);
+    auto fire_spell_creator = new FireSpellCreator();
+    fire_spell_creator->init();
+    weapon2_->setSpellCreator(fire_spell_creator);
+    weapon2_->addChild(fire_spell_creator);
     weapon2_->setSoundPath("assets/sound/fire-magic-6947.mp3");
     weapon2_->setTriggerButton(SDL_BUTTON_MIDDLE);
 
