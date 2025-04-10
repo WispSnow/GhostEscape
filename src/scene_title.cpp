@@ -36,8 +36,8 @@ bool SceneTitle::handleEvents(SDL_Event &event)
     if (credits_text_->getActive()) {
         if (event.type == SDL_EVENT_MOUSE_BUTTON_UP) { 
             credits_text_->setActive(false);
-            return true;
         }
+        return true;        // 事件不会穿透credits_text_
     }
     if (Scene::handleEvents(event)) return true;
     return false;

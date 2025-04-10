@@ -47,6 +47,9 @@ add_executable(${TARGET}
                 src/raw/move_control.cpp
                 src/raw/thunder_spell_creator.cpp
                 src/raw/fire_spell_creator.cpp
+                src/state/button_state_normal.cpp
+                src/state/button_state_hover.cpp
+                src/state/button_state_press.cpp
                 src/world/effect.cpp
                 src/world/spell.cpp
                 src/affiliate/sprite.cpp
