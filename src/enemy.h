@@ -25,7 +25,7 @@ public:
     static Enemy* addEnemyChild(Object* parent, glm::vec2 pos, Player* target);
     virtual void init() override;
     virtual void update(float dt) override;  // override the update function from Actor
-
+    virtual void render() override;     // 如果超出屏幕区域就不要调用绘制函数
     // getters and setters
     Player* getTarget() { return target_; }
     void setTarget(Player* target) { target_ = target; }

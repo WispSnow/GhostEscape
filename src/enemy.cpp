@@ -35,7 +35,9 @@ void Enemy::init()
 }
 
 void Enemy::update(float dt){
-    Actor::update(dt);
+    auto render_pos_start = getRenderPosition() + current_anim_->getOffset();
+    auto render_pos_end = render_pos_start + current_anim_->getSize();
+    if(!Game::getInstance().isRectCollideRect(render_pos_start, render_pos_end, glm::vec2(0), Game::getInstance().getScreenSize())) return;
     if (target_->getActive()){
         if (!move_control_) aim_target(target_);
         move(dt);
@@ -43,8 +45,17 @@ void Enemy::update(float dt){
     }
     checkState();
     remove();
+    Actor::update(dt);
 }
 
+void Enemy::render()
+{
+    auto render_pos_start = getRenderPosition() + current_anim_->getOffset();
+    auto render_pos_end = render_pos_start + current_anim_->getSize();
+    if(!Game::getInstance().isRectCollideRect(render_pos_start, render_pos_end, glm::vec2(0), Game::getInstance().getScreenSize())) return;
+    SDL_Log("render enemy");
+    Actor::render();
+}
 
 void Enemy::aim_target(Player *target)
 {

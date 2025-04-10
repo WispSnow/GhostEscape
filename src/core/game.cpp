@@ -240,6 +240,22 @@ std::string Game::loadTextFile(const std::string &file_path)
     return text;
 }
 
+bool Game::isRectCollideRect(const glm::vec2 &rect1_top_left, const glm::vec2 &rect1_botton_right, const glm::vec2 &rect2_top_left, const glm::vec2 &rect2_botton_right)
+{
+    if (rect1_top_left.x > rect2_botton_right.x || rect1_botton_right.x < rect2_top_left.x || rect1_top_left.y > rect2_botton_right.y || rect1_botton_right.y < rect2_top_left.y){
+        return false;
+    }
+    return true;
+}
+
+bool Game::isRectInRect(const glm::vec2 &rect1_top_left, const glm::vec2 &rect1_botton_right, const glm::vec2 &rect2_top_left, const glm::vec2 &rect2_botton_right)
+{
+    if (rect1_top_left.x > rect2_top_left.x && rect1_botton_right.x < rect2_botton_right.x && rect1_top_left.y > rect2_top_left.y && rect1_botton_right.y < rect2_botton_right.y){
+        return true;
+    }
+    return false;
+}
+
 void Game::updateMouse()
 {
     mouse_buttons_ = SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
@@ -258,10 +274,10 @@ void Game::updateMouse()
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &botton_right, float grid_width, SDL_FColor fcolor)
 {
     SDL_SetRenderDrawColorFloat(renderer_, fcolor.r, fcolor.g, fcolor.b, fcolor.a);
-    for (float x = top_left.x; x <= botton_right.x; x += grid_width){
+    for (float x = glm::mod(top_left.x, grid_width); x <= screen_size_.x; x += grid_width){
         SDL_RenderLine(renderer_, x, top_left.y, x, botton_right.y);
     }
-    for (float y = top_left.y; y <= botton_right.y; y += grid_width){
+    for (float y = glm::mod(top_left.y, grid_width); y <= screen_size_.y; y += grid_width){
         SDL_RenderLine(renderer_, top_left.x, y, botton_right.x, y);
     }
     SDL_SetRenderDrawColorFloat(renderer_, 0, 0, 0, 1);
@@ -269,6 +285,10 @@ void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &botton_right, fl
 
 void Game::drawBoundary(const glm::vec2 &top_left, const glm::vec2 &botton_right, float boundary_width, SDL_FColor fcolor)
 {
+    if (!isRectCollideRect(top_left - glm::vec2(boundary_width), botton_right + glm::vec2(boundary_width), glm::vec2(0), screen_size_) ||
+        isRectInRect(glm::vec2(0), screen_size_, top_left, botton_right)){
+        return;
+    }
     SDL_SetRenderDrawColorFloat(renderer_, fcolor.r, fcolor.g, fcolor.b, fcolor.a);
     for (float i = 0; i < boundary_width; i++){
         SDL_FRect rect = {

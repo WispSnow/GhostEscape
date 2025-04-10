@@ -9,7 +9,7 @@ void Spawner::update(float dt)
     timer_ += dt;
     if (timer_ >= interval_)
     {
-        timer_ = 0;
+        timer_ = -10000000;
         Game::getInstance().playSound("assets/sound/silly-ghost-sound-242342.mp3");
         for (int i = 0; i < num_; i++)
         {

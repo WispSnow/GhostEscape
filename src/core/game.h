@@ -102,6 +102,8 @@ public:
     // 工具函数
     bool isMouseInRect(const glm::vec2& top_left, const glm::vec2& botton_right);
     std::string loadTextFile(const std::string& file_path);
+    bool isRectCollideRect(const glm::vec2& rect1_top_left, const glm::vec2& rect1_botton_right, const glm::vec2& rect2_top_left, const glm::vec2& rect2_botton_right);
+    bool isRectInRect(const glm::vec2& rect1_top_left, const glm::vec2& rect1_botton_right, const glm::vec2& rect2_top_left, const glm::vec2& rect2_botton_right);
 
 private:
     void updateMouse();
