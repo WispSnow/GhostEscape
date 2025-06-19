@@ -1,8 +1,12 @@
 # GhostEscape
 利用SDL3、GLM开发一款生存类型的游戏
 
+([C++游戏开发之旅](https://pan.baidu.com/s/1xGGgZbhE6WuSPzlKuTmdMw?pwd=wd9g) 第二期)
+
 ## 项目简介
 此项目为教学演示用途，配套教程：[视频](https://www.bilibili.com/video/BV1jf9XYQEhW/)，[文字](https://cppgamedev.top/courses/modular-ghost-escape)
+
+>因网络时常不稳定，环境安装包及代码均可从[百度网盘](https://pan.baidu.com/s/16OuMaAqehGjzSoMS19zNcA?pwd=5brp)中下载。如果使用`Library.zip`，则只需要配置环境变量即可（代码版本可能落后于Github仓库）
 
 提示：仓库中包含了所有课节的代码，你可以根据视频教程的进度查找对应的代码。<img src="https://theorhythm.top/gamedev/tags.png" style='width: 400px;' />
 <img src="https://theorhythm.top/gamedev/download.png" style='width: 800px;' />
@@ -21,6 +25,8 @@
 <img src="https://theorhythm.top/gamedev/GE/de0aeb654956613ce73dfbe60156be34.png" />
 其中C++编译器、CMake、SDL、VS Code的安装方法及相关配置已经在上一期教程中说明，请参见 [Github仓库](https://github.com/WispSnow/SDLShooter) 或 视频演示（[环境安装](https://www.bilibili.com/video/BV1KkCFY4EKH/)、[VScode配置](https://www.bilibili.com/video/BV17bCBYSEAY)、[CMake配置](https://www.bilibili.com/video/BV19CCHYNEvQ)）。**但是要特别注意，SDL的版本需要是“SDL3”而非“SDL2”。** SDL2版本只适用于上一期教程。
 > 查看最新版本的SDL库：[SDL](https://github.com/libsdl-org/SDL/releases/)，[SDL_image](https://github.com/libsdl-org/SDL_image/releases)，[SDL_mixer](https://github.com/libsdl-org/SDL_mixer/releases)，[SDL_ttf](https://github.com/libsdl-org/SDL_ttf/releases) 
+
+提示：目前SDL_mixer并未发布3.x版本，自己编译比较繁琐（方法参见[视频教程](https://www.bilibili.com/video/BV1J2RpYGEmj/)），建议直接使用我在[百度网盘](https://pan.baidu.com/s/16OuMaAqehGjzSoMS19zNcA?pwd=5brp)中整理好的第三方库文件
 
 此处补充 GLM 安装方法（请确保其它组件成功安装后再安装GLM）：
 ### Ubuntu Linux
