@@ -21,7 +21,16 @@ F4 - toggle fullscreen;
 * [SDL3_ttf](https://github.com/libsdl-org/SDL_ttf)
 * [glm](https://github.com/g-truc/glm)
 
-See [wiki](../../wiki) for detailed building guide (in Chinese).
+## How to build
+Dependencies will be automatically downloaded by Git FetchContent to make building quite easy:
+```bash
+git clone https://github.com/WispSnow/GhostEscape.git
+cd GhostEscape
+cmake -S . -B build
+cmake --build build
+```
+
+If you encounter trouble downloading from GitHub (especially on networks in mainland China), please refer to the [wiki](../../wiki) for an alternative building guide.
 
 ## Credits
 - sprite
