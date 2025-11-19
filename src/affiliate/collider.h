@@ -3,6 +3,7 @@
 
 #include "../core/object_affiliate.h"
 
+class ObjectWorld;
 class Spell;
 class Collider : public ObjectAffiliate
 {
@@ -18,7 +19,7 @@ protected:
 public:
     virtual void render() override;
     
-    static Collider* addColliderChild(ObjectScreen* parent, glm::vec2 size, Type collider_type = Type::CIRCLE, Anchor anchor = Anchor::CENTER);
+    static Collider* addColliderChild(ObjectWorld* parent, glm::vec2 size, Type collider_type = Type::CIRCLE, Anchor anchor = Anchor::CENTER);
     bool isColliding(Collider* other);
 
     // getters and setters

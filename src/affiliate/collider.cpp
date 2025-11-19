@@ -1,6 +1,7 @@
 #include "collider.h"
+#include "../core/object_world.h"
 
-Collider *Collider::addColliderChild(ObjectScreen *parent, glm::vec2 size, Type collider_type, Anchor anchor)
+Collider *Collider::addColliderChild(ObjectWorld *parent, glm::vec2 size, Type collider_type, Anchor anchor)
 {
     auto collider = new Collider();
     collider->init();
