@@ -1,35 +1,35 @@
-**English** | [简体中文](README-ZN.md)
+[English](README.md) | **简体中文**
 
 # GhostEscape
-**GhostEscape** is a cross-platform survival game developed in C++ with SDL3 and glm.
+**GhostEscape** 是一款使用 C++、SDL3 和 glm 开发的跨平台生存游戏。
 
-> This project is a teaching demonstration project; it is the 2nd episode in a series of tutorials titled "[C++ 游戏开发之旅](https://cppgamedev.top/)".
+> 本项目是一个教学演示项目；它是系列教程“[C++ 游戏开发之旅](https://cppgamedev.top/)”的第 2 集。
 
-## Control
+## 控制
 ```
-W,A,S,D - to move;
-Mouse Left - to attack;
-Mouse Right - slow motion;
-F4 - toggle fullscreen;
+W,A,S,D - 移动;
+鼠标左键 - 攻击;
+鼠标右键 - 慢动作;
+F4 - 切换全屏;
 ```
 
-## Play on Webpage
+## 网页版试玩
 [GhostEscape](https://wispsnow.github.io/GhostEscape/)
 
-## ScreenShot
+## 截图
 <img src="https://theorhythm.top/gamedev/GE/screen_ge_1.png" style='width: 600px;'/>
 <img src="https://theorhythm.top/gamedev/GE/screen_ge_2.png" style='width: 600px;'/>
 <img src="https://theorhythm.top/gamedev/GE/screen_ge_3.png" style='width: 600px;'/>
 
-## Third-party libraries
+## 第三方库
 * [SDL3](https://github.com/libsdl-org/SDL)
 * [SDL3_image](https://github.com/libsdl-org/SDL_image)
 * [SDL3_mixer](https://github.com/libsdl-org/SDL_mixer)
 * [SDL3_ttf](https://github.com/libsdl-org/SDL_ttf)
 * [glm](https://github.com/g-truc/glm)
 
-## How to build
-Dependencies will be automatically downloaded by Git FetchContent to make building quite easy:
+## 如何构建
+依赖项将通过 Git FetchContent 自动下载，构建非常简单：
 ```bash
 git clone https://github.com/WispSnow/GhostEscape.git
 cd GhostEscape
@@ -37,9 +37,9 @@ cmake -S . -B build
 cmake --build build
 ```
 
-If you encounter trouble downloading from GitHub (especially on networks in mainland China), please refer to the [wiki](../../wiki) for an alternative building guide.
+如果您在从 GitHub 下载时遇到问题（尤其是在中国大陆网络环境下），请参考 [wiki](../../wiki) 获取替代构建指南。
 
-## Credits
+## 鸣谢 (Credits)
 - sprite
     - https://caz-creates-games.itch.io/ghost
     - https://master-blazter.itch.io/ghostspritepack
@@ -65,19 +65,19 @@ If you encounter trouble downloading from GitHub (especially on networks in main
     - https://games-for-all-7.itch.io/spooky-music
     - https://poltergasm.itch.io/oh-my-ghost-music
 
-- Sponsors: `sino`, `李同学` 
+- 赞助者: `sino`, `李同学` 
 
-## Contact
+## 联系方式
 
-For support or feedback, please contact us through the GitHub issues section of this repository. Your feedback is crucial for making this series of tutorials better!
+如需支持或反馈，请通过本仓库的 GitHub issues 版块联系我们。您的反馈对于改进本系列教程至关重要！
 
-## Buy Me a Coffee
+## 请我喝杯咖啡
 [!["Buy Me A Coffee"](https://storage.ko-fi.com/cdn/kofi2.png?v=3)](https://ko-fi.com/ziyugamedev)
 [!["Support me on Afdian"](https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png)](https://afdian.com/a/ziyugamedev)
 
 
 
-## QQ Discussion Group and My WeChat QR Code
+## QQ 交流群和我的微信二维码
 
 <div style="display: flex; gap: 10px;">
   <img src="https://theorhythm.top/personal/qq_group.webp" width="200" />

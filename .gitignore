@@ -4,10 +4,12 @@
 
 # IDE
 .config/
+.cache/
 
 # build
 build/
 build-*/
+build_*/
 *-darwin
 *-Darwin
 
