@@ -14,6 +14,7 @@ SpriteAnim *SpriteAnim::addSpriteAnimChild(ObjectScreen *parent, const std::stri
 
 void SpriteAnim::update(float dt)
 {
+    Sprite::update(dt);
     if (is_finish_) return;
     frame_timer_ += dt;
     if (frame_timer_ >= 1.0f / fps_)

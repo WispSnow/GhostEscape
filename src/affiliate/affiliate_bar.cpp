@@ -16,6 +16,7 @@ AffiliateBar *AffiliateBar::addAffiliateBarChild(ObjectScreen *parent, glm::vec2
 
 void AffiliateBar::render()
 {
+    ObjectAffiliate::render();
     auto pos = parent_->getRenderPosition() + offset_;
     if (percentage_ > 0.7f){
         game_.renderHBar(pos, size_, percentage_, color_high_);
