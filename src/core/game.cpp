@@ -7,6 +7,11 @@
 #include "../affiliate/sprite.h"
 #include <fstream>
 
+Game::~Game()
+{
+    clean();
+}
+
 void Game::run()
 {
     while (is_running_){

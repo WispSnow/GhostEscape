@@ -43,6 +43,7 @@ class Game
     Game& operator=(const Game&) = delete;
 
 public:
+    ~Game();
     static Game& GetInstance()
     {
         static Game instance;
