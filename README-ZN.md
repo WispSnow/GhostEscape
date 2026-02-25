@@ -72,9 +72,8 @@ cmake --build build
 如需支持或反馈，请通过本仓库的 GitHub issues 版块联系我们。您的反馈对于改进本系列教程至关重要！
 
 ## 请我喝杯咖啡
-[!["Buy Me A Coffee"](https://storage.ko-fi.com/cdn/kofi2.png?v=3)](https://ko-fi.com/ziyugamedev)
-[!["Support me on Afdian"](https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png)](https://afdian.com/a/ziyugamedev)
-
+<a href="https://ko-fi.com/ziyugamedev"><img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy Me A Coffee" width="200" /></a>
+<a href="https://afdian.com/a/ziyugamedev"><img src="https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png" alt="Support me on Afdian" width="200" /></a>
 
 
 ## QQ 交流群和我的微信二维码
