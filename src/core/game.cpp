@@ -44,15 +44,24 @@ void Game::init(std::string title, int width, int height)
     }
     // 不需要进行SDL_image初始化
     // SDL3_Mixer初始化
-    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) != (MIX_INIT_MP3 | MIX_INIT_OGG)){
+    if (!MIX_Init()){
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL_Mixer初始化失败: %s\n", SDL_GetError());
     }
-    if (!Mix_OpenAudio(0, NULL)){
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "SDL_Mixer打开音频失败: %s\n", SDL_GetError());
+    mixer_ = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL);
+    if (!mixer_){
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "创建音频混合器失败: %s\n", SDL_GetError());
     }
-    Mix_AllocateChannels(16); // 分配16个音频通道
-    Mix_VolumeMusic(MIX_MAX_VOLUME / 4); // 设置音乐音量
-    Mix_Volume(-1, MIX_MAX_VOLUME / 4); // 设置音效音量
+    music_track_ = MIX_CreateTrack(mixer_);
+    if (!music_track_){
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "创建音乐轨道失败: %s\n", SDL_GetError());
+    }
+    loop_props_ = SDL_CreateProperties();
+    if (loop_props_ == 0){
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "创建循环属性失败: %s\n", SDL_GetError());
+    }
+    SDL_SetNumberProperty(loop_props_, MIX_PROP_PLAY_LOOPS_NUMBER, -1); // 设置循环属性为-1，代表无限循环
+
+    MIX_SetMixerGain(mixer_, 0.25f); // 设置混合器增益为0.25，代表较低音量
 
     // SDL3_TTF初始化
     if (!TTF_Init()){
@@ -131,8 +140,16 @@ void Game::clean()
         SDL_DestroyWindow(window_);
     }
     // 退出Mix
-    Mix_CloseAudio();
-    Mix_Quit();
+    if (loop_props_){
+        SDL_DestroyProperties(loop_props_);
+    }
+    if (music_track_){
+        MIX_DestroyTrack(music_track_);
+    }
+    if (mixer_){
+        MIX_DestroyMixer(mixer_);
+    }
+    MIX_Quit();
     // 退出TTF
     TTF_Quit();
     // 退出SDL
@@ -160,6 +177,12 @@ void Game::changeScene(Scene *scene)
     }
     current_scene_ = scene;
     current_scene_->init();
+}
+
+void Game::playMusic(const std::string &music_path, bool loop)
+{
+    MIX_SetTrackAudio(music_track_, asset_store_->getMusic(music_path));
+    MIX_PlayTrack(music_track_, loop ? loop_props_ : 0);
 }
 
 void Game::renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size, const glm::vec2 &mask)

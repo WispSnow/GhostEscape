@@ -16,6 +16,10 @@ class Game
 {
     AssetStore* asset_store_ = nullptr; // 资源管理器
     glm::vec2 screen_size_ = glm::vec2(0); // 屏幕大小
+
+    MIX_Mixer *mixer_ = nullptr; // 音频混合器
+    MIX_Track *music_track_ = nullptr; // 当前播放的音乐
+    SDL_PropertiesID loop_props_ = 0; // 循环属性ID
     
     glm::vec2 mouse_position_ = glm::vec2(0);
     SDL_MouseButtonFlags mouse_buttons_ = 0;
@@ -74,14 +78,14 @@ public:
     void changeScene(Scene* scene);
 
     // 音频函数
-    void playMusic(const std::string& music_path, bool loop = true) { Mix_PlayMusic(asset_store_->getMusic(music_path), loop ? -1 : 0); } //-1代表无限循环
-    void playSound(const std::string& sound_path) { Mix_PlayChannel(-1, asset_store_->getSound(sound_path), 0); }
-    void stopMusic() { Mix_HaltMusic(); }
-    void stopSound() { Mix_HaltChannel(-1); }       // 停止所有音效
-    void pauseMusic() { Mix_PauseMusic(); }
-    void pauseSound() { Mix_Pause(-1); }
-    void resumeMusic() { Mix_ResumeMusic(); }
-    void resumeSound() { Mix_Resume(-1); }
+    void playMusic(const std::string& music_path, bool loop = true);
+    void playSound(const std::string& sound_path) { MIX_PlayAudio(mixer_, asset_store_->getSound(sound_path)); }
+    void stopMusic() { MIX_StopTrack(music_track_, 0); }
+    void stopSound() { MIX_StopAllTracks(mixer_, 0); }       // 停止所有音效
+    void pauseMusic() { MIX_PauseTrack(music_track_); }
+    void pauseSound() { MIX_PauseAllTracks(mixer_); }
+    void resumeMusic() { MIX_ResumeTrack(music_track_); }
+    void resumeSound() { MIX_ResumeAllTracks(mixer_); }
 
     // 随机数函数
     float randomFloat(float min, float max) { return std::uniform_real_distribution<float>(min, max)(gen_); }

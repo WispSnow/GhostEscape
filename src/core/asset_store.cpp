@@ -10,13 +10,13 @@ void AssetStore::clean()
 
     for (auto &sound : sounds_)
     {
-        Mix_FreeChunk(sound.second);
+        MIX_DestroyAudio(sound.second);
     }
     sounds_.clear();
 
     for (auto &music : music_)
     {
-        Mix_FreeMusic(music.second);
+        MIX_DestroyAudio(music.second);
     }
     music_.clear();
 
@@ -41,7 +41,7 @@ void AssetStore::loadImage(const std::string &file_path)
 
 void AssetStore::loadSound(const std::string &file_path)
 {
-    Mix_Chunk *sound = Mix_LoadWAV(file_path.c_str());
+    MIX_Audio *sound = MIX_LoadAudio(NULL, file_path.c_str(), true);
     if (sound == nullptr)
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to load sound: %s", file_path.c_str());
@@ -52,7 +52,7 @@ void AssetStore::loadSound(const std::string &file_path)
 
 void AssetStore::loadMusic(const std::string &file_path)
 {
-    Mix_Music *music = Mix_LoadMUS(file_path.c_str());
+    MIX_Audio *music = MIX_LoadAudio(NULL, file_path.c_str(), false);
     if (music == nullptr)
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Failed to load music: %s", file_path.c_str());
@@ -88,7 +88,7 @@ SDL_Texture *AssetStore::getImage(const std::string &file_path)
     return iter->second;
 }
 
-Mix_Chunk *AssetStore::getSound(const std::string &file_path)
+MIX_Audio *AssetStore::getSound(const std::string &file_path)
 {
     auto iter = sounds_.find(file_path);
     if (iter == sounds_.end())          // 如果没有找到，则载入。
@@ -104,7 +104,7 @@ Mix_Chunk *AssetStore::getSound(const std::string &file_path)
     return iter->second;
 }
 
-Mix_Music *AssetStore::getMusic(const std::string &file_path)
+MIX_Audio *AssetStore::getMusic(const std::string &file_path)
 {
     auto iter = music_.find(file_path);
     if (iter == music_.end())           // 如果没有找到，则载入。
